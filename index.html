@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App by Isiaka Abdulahi</title>
+    <link rel="shortcut icon" href="./Images/favicon.svg" type="image/x-icon" />
+    <script src="https://kit.fontawesome.com/93ebee4231.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <script type="module" src="index.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="pt-3 d-flex align-items-center mb-0 headings">
+        <i class="fas fa-bars"></i>
+        <p class="mb-0 m-auto">Weather Forecast</p> 
+        
+    </div>
+
+    <!-- input  -->
+    <form action="">
+    <div class="searchLocation m-auto d-flex justify-content-center align-items-center" id="searchLocation">
+      
+      <input type="search" name=""  autofocus autocomplete="country" id="search-input" class="search-input">
+     
+     <button class="searchBtn" id="searchBtn">
+       <i  role="button"   class="fas fa-search search-icon"  id="search-icon"></i>
+
+     </button>
+    </div>
+  </form>
+    <!-- date and weather -->
+    <div class="m-right d-flex justify-content-center mt-3 mb-2  day">
+        <div class="weather-icon align-self-center mr-2"><i class="fas fa-cloud"></i></div>
+        <div>
+            <p class="today mb-0" id="today">Today</p>
+            <small>Sat, 3 Aug</small>
+        </div>
+        
+    </div>
+    <!-- temperature -->
+    <div class="d-flex   justify-content-center ">
+      <p class="temp">28<sup> °c</sup></p>
+    </div>
+    <p class="location  text-center">Barcelona , spain <span><i class="fas fa-edit"></i></span></p>
+
+    <p class="text-center">feels like <span class="value">32</span> <span>Sunset 20:15</span></p>
+  
+
+    <div class="d-flex justify-content-center current-weather container  ">
+      <div class="row">
+        <div class="col">
+          <h4>Monday</h4>
+        </div>
+        <div class="col">
+          <h4>Weather</h4>
+        </div>
+        <div class="col weather-value">
+          <h4>26 °c<span></span></h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h4>Monday</h4>
+        </div>
+        <div class="col">
+          <h4>Weather</h4>
+        </div>
+        <div class="col weather-value">
+          <h4>26 °c<span></span></h4>
+        </div>
+      </div>
+
+
+    </div>
+
+</div>
+</body>
+</html>
