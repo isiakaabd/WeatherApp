@@ -330,7 +330,6 @@ const weatherelement = (currentCondtion, weatherJSON) => {
 }
 
 const getSunRIseOrSet = (weatherJSON, currentCondtion) => {
- console.log(currentCondtion)
   var currentsunValue = ''
   const z = weatherJSON.current.dt
   const y = weatherJSON.current.sunrise

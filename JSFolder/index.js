@@ -21,7 +21,7 @@ const initApp = () => {
 
   mapIcon.addEventListener("click", ()=>getWeatherOnLoad())
   searchForm.addEventListener('submit', searchNewlocation)
-
+  searchForm.reset()
   getWeatherOnLoad()
 }
 
