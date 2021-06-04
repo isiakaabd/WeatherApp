@@ -16,16 +16,16 @@
 }
 
 .clouds {
-  background-image: url(./imageFolder/Cloud.jpg);
+  background-image: url(./imageFolder/Cloud2.jpg);
   color: var(--colored-white);
 }
 
 .night {
-  background-image: url(./imageFolder/night.jpg);
+  background-image: url(./imageFolder/rednight.jpg);
 }
 
 .rain {
-  background-image: url(./imageFolder/rain.jpg);
+  background-image: url(./imageFolder/rain2.jpg);
 }
 .snow {
   background-image: url(./imageFolder/bg.jpg);
@@ -121,7 +121,10 @@ h4,h6 {
 }
 .search-input:focus {
   outline: 0;
+  color: var(--main-color);
+  background-color:transparent !important;
 }
+
 button {
   background-color: transparent !important;
 
@@ -134,6 +137,9 @@ button {
   cursor: pointer;
 }
 
+.fa-map-marker{
+cursor:pointer
+}
 #container {
   display: flex;
   flex-direction: column;
@@ -196,6 +202,7 @@ margin: 0 auto;
   color: #1e1e45;
   padding: 8px 0 12px 0;
   margin: 0 auto;
+  grid-template-rows: 2fr 1fr 1fr;
 }
 .grid-item {
  
@@ -208,15 +215,15 @@ width: 100%;
 .grid-heading{
 font-size: 1rem;
 font-weight: 600;
+line-height: 1.2;
 }
 
 .grid2{
   text-align: center;
-  word-wrap: nowrap;
+
   word-break: keep-all;
   word-spacing: 0;
-  letter-spacing: .1;
-  width: 100px;
+  padding: 0;
   }
 
   .latLon{
