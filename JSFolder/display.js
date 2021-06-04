@@ -5,20 +5,20 @@ export const errorDisplay = (headerMsg) => {
 }
 
 const updateWeather = (message) => {
-  const today = document.getElementById('networkError')
-  today.classList.toggle('none')
-  today.textContent = message
+  const networkError = document.getElementById('networkError');
+  networkError.classList.remove('none')
+  networkError.textContent = message
 }
 
 export const animateIcon = (element) => {
   animate(element)
-  setTimeout(animate, 1000)
+  setTimeout(animate, 1000,element)
 }
 
-const animate = (element) => {
-  element.classList.toggle('none')
-  element.nextElementSibling.classList.toggle('block')
-  element.nextElementSibling.classList.toggle('none')
+const animate = (ele) => {
+  ele.classList.toggle('none')
+  ele.nextElementSibling.classList.toggle('block')
+  ele.nextElementSibling.classList.toggle('none')
 }
 
 export const cleanText = (text) => {
@@ -43,6 +43,7 @@ export const getDataFromAPI = async (TextValue) => {
     // console.log(dataJson)
     return dataJson
   } catch (error) {
+    alert(error)
     errorDisplay(error.message)
     
   }
@@ -94,7 +95,7 @@ export const updateDisplay = (weatherJSON, myLoc) => {
   // updateWeather('Today')
   // setting todays date
   setTodaysDate('small', dateObj())
-  const currentCondtion = createCurrentCondition(weatherJSON, myLoc.Unit)
+  const currentCondtion = createCurrentCondition(weatherJSON, myLoc)
   //displayCurrentCondition(currentCondtion, weatherJSON)
   const weather = weatherelement(currentCondtion, weatherJSON)
   const secondContainer = document.querySelector('.secondContainer')
@@ -148,13 +149,12 @@ const setBGimage = (weatherClass) => {
   })
 }
 
-const createCurrentCondition = (weatherClass) => {
+const createCurrentCondition = (weatherClass,myLocation) => {
   const icon = iconMainDiv(
     weatherClass.current.weather[0].icon,
     weatherClass.current.weather[0].description,
   )
   const main = weatherClass.current
-  const sys = weatherClass.timezone
   const { description } = weatherClass.daily[0].weather[0]
   const {
     temp,
@@ -167,7 +167,7 @@ const createCurrentCondition = (weatherClass) => {
     visibility,
     uvi
   } = main
-  const { country } = sys
+  
   const { min, max } = weatherClass.daily[0].temp
   //const { speed } = weatherClass.current.wind_speed
   const temps = roundedNumber(temp)
@@ -177,8 +177,8 @@ const createCurrentCondition = (weatherClass) => {
   const humidityValue = roundedNumber(humidity)
   const windValue = roundedNumber(wind_speed)
   const visibilityValue = visibility
-  const name = weatherClass.name
-  const countryText = country
+  const name = myLocation.lat
+  const countryText = myLocation.lon
   const sunriseValue = ToHours(sunrise)
   const sunsetValue = ToHours(sunset)
   const descr = toProperCase(weatherClass.timezone)
@@ -202,6 +202,7 @@ const createCurrentCondition = (weatherClass) => {
     uvi
   ]
 }
+
 const iconMainDiv = (icon, description) => {
   const FaIcons = TranslatetoFontAwesome(icon)
   FaIcons.title = description
@@ -263,26 +264,7 @@ const TranslatetoFontAwesome = (icon) => {
   return i
 }
 
-const displayCurrentCondition = (currentCondtion, weatherJSON) => {
-  const getDays = new Date()
-  const date = getDays.getHours()
-  console.log(currentCondtion)
-  // const temps = document.getElementById('temp')
-  // const feelsText = document.getElementById('value')
-  // const humidityText = document.getElementById('humidity')
-  // const windText = document.getElementById('wind')
-  // const visibilityText = document.getElementById('visibility')
-  // const name = document.getElementById('name')
-  // const country = document.getElementById('country')
-  // const sunrise = document.getElementById('sunrise')
-  // const weekdays = document.getElementById('weekdays')
-  // const currentday = document.getElementById('currentday')
-  // const minCurrentday = document.getElementById('minCurrentday')
-  // const weatherIcon = document.getElementById('weather-icon')
-  // const currentDescription = document.getElementById('current-description')
 
-  //
-}
 const weatherelement = (currentCondtion, weatherJSON) => {
   const generalContainer = document.createElement('div')
   generalContainer.className = 'currentDataInfo'
@@ -342,15 +324,17 @@ const weatherelement = (currentCondtion, weatherJSON) => {
     getSunRIseOrSet(weatherJSON, currentCondtion),
   )
   feelsLike.append(value, round, sunrise)
-  generalContainer.append(container, locationContainer, feelsLike)
+  const latLon = createEle("div","latLon", null, `Lat: ${currentCondtion[9].toFixed(4)} , Lon: ${currentCondtion[10].toFixed(4)}`)
+  generalContainer.append(container, locationContainer, feelsLike,latLon)
   return generalContainer
 }
 
 const getSunRIseOrSet = (weatherJSON, currentCondtion) => {
+ console.log(currentCondtion)
   var currentsunValue = ''
   const z = weatherJSON.current.dt
   const y = weatherJSON.current.sunrise
-  if (z <y)
+  if (z <=y)
     currentsunValue = `Sunset ${currentCondtion[12]}`
   else currentsunValue = `Sunrise ${currentCondtion[11]} `
   return currentsunValue
@@ -444,7 +428,24 @@ const cretaEle = (
   IconDiv.append(w)
 
   day.innerHTML = daysItem
-  ele.append(IconDiv)
+ 
+
+
+
+  // const openWeatherIcon =  (iconclass, icondescirption)=>{
+
+  //   var img   = new Image();
+    
+  //      const url = `http://openweathermap.org/img/wn/${iconclass}.png`;
+    
+  //   img.title = icondescirption;
+  //   img.alt =icondescirption
+  //    img.className = "img"
+  //   img.src = url
+  //       return  img
+  //     }
+    // const image = openWeatherIcon(iconclass, icondescirption);
+    // ele.append(image)
   // high and low temp container
   const highContainer = document.createElement('div')
   const high = document.createElement('div')
@@ -454,10 +455,10 @@ const cretaEle = (
   high.className = 'high'
   low.className = 'low'
 
-  highContainer.appendChild(high)
-  highContainer.appendChild(low)
+  highContainer.append(high,low)
+  
 
-  ele.append(highContainer)
+  ele.append(IconDiv, highContainer)
 
   return ele
 }
@@ -477,22 +478,28 @@ if (tempValue ==="humidity")element.innerHTML = `${textcontent}%`
 // creating grid 
 
  const gridSystem  = (currentCondtion, weatherJSON) =>{
-  const grid1= createEle("div", "grid-item grid-heading", "div",convertToDateString( weatherJSON.current.dt))
-  const grid2= createEle("div", "grid-item grid-heading grid2", "div", toProperCase(currentCondtion[14]))
+  const grid1= createEle("div", "grid-item grid-heading", null,convertToDateString( weatherJSON.current.dt))
+  const grid2= createEle("div", "grid-item grid-heading grid2", null, toProperCase(currentCondtion[14]))
   const grid3= createEle("div", "grid-item grid-heading", "temp", currentCondtion[3])
   const grid4= createEle("div", "grid-item text-muted", "temp", currentCondtion[4])
-  const grid5= createEle("div", "grid-item grid-heading", "div", "Wind")
+  const grid5= createEle("div", "grid-item grid-heading", null, "Wind")
   const grid6= createEle("div", "grid-item text-muted", "wind", currentCondtion[7])
-  const grid7= createEle("div", "grid-item grid-heading", "div", "Humidity")
+  const grid7= createEle("div", "grid-item grid-heading", null, "Humidity")
   const grid8= createEle("div", "grid-item text-muted", "humidity", currentCondtion[6])
-  const grid9= createEle("div", "grid-item grid-heading", "div", "Visibility")
-  const grid10= createEle("div", "grid-item text-muted", "div", currentCondtion[8])
-  const grid11= createEle("div", "grid-item grid-heading", "div", "UV")
-  const grid12= createEle("div", "grid-item text-muted", "div", currentCondtion[15])
+  const grid9= createEle("div", "grid-item grid-heading", null, "Visibility")
+  const grid10= createEle("div", "grid-item text-muted", null, currentCondtion[8])
+  const grid11= createEle("div", "grid-item grid-heading", null, "UV")
+  const grid12= createEle("div", "grid-item text-muted", null, currentCondtion[15])
 
    const gridContainer = document.querySelector(".grid")
    // createEle("div","grid", "div", null);
    gridContainer.append(grid1,grid2,grid3,grid4,grid5,grid6,grid7,grid8,grid9,grid10,grid11,grid12)
 return  gridContainer
   }
+
+
+
+  // Icon from open
+
+
 

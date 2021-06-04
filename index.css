@@ -105,7 +105,7 @@ sup {
 
 .none {
   display: none;
-  visibility: hidden;
+  
 }
 .block {
   display: block;
@@ -195,12 +195,13 @@ margin: 0 auto;
   border-radius: 5px;
   color: #1e1e45;
   padding: 8px 0 12px 0;
+  margin: 0 auto;
 }
 .grid-item {
  
   height: 50px;
   padding: 10px;
-
+width: 100%;
   text-align: left;
   place-self: center;
 }
@@ -216,4 +217,15 @@ font-weight: 600;
   word-spacing: 0;
   letter-spacing: .1;
   width: 100px;
+  }
+
+  .latLon{
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  hr{
+    line-height : 4px;
+  
+    color: var(--main-white);
   }

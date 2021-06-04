@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App by Isiaka Abdulahi</title>
+    <meta name="description" content="A weather App developed by Isiaka Abdulahi that enables users to search different location using states code or location name">
+    <title>Weather App by Isiaka Abdulahi using Open weather API </title>
     <link rel="shortcut icon" href="./Images/favicon.svg" type="image/x-icon" />
     <script
       src="https://kit.fontawesome.com/93ebee4231.js"
@@ -22,8 +23,8 @@
   <body class="clouds">
     <div class="container fade-in" id="container">
       <div class="pt-3 d-flex align-items-center mb-0 headings">
-        <i class="fas fa-bars"></i>
-        <p class="mb-0 m-auto">Weather Forecast</p>
+        <i class="fa fa-map-marker fa-2x none" ></i>
+        <h4 class="mb-0 m-auto">Weather Forecast</h4>
       </div>
 
       <form action="" id="searchForm" class="fade-in">
@@ -47,8 +48,8 @@
       </form>
 
       <!-- date and weather -->
+      <h5 id="networkError" class="none" ></h5>
       <div class="secondContainer flex-grow-2">
-        <h5 id="networkError" class="none"></h5>
         <!-- current condition -->
       </div>
 
@@ -62,5 +63,6 @@
         <div class="row row-div flex-grow-2" id="rowDiv"></div>
       </div>
     </div>
+    
   </body>
 </html>
