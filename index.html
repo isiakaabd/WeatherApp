@@ -21,7 +21,7 @@
   </head>
   <body class="clouds">
     <div class="container fade-in" id="container">
-      <div class="pt-3 d-flex align-items-center  mb-0 headings">
+      <div class="pt-3 d-flex align-items-center mb-0 headings">
         <i class="fas fa-bars"></i>
         <p class="mb-0 m-auto">Weather Forecast</p>
       </div>
@@ -51,51 +51,11 @@
         <h5 id="networkError" class="none"></h5>
         <!-- current condition -->
       </div>
-      <div class="d-flex justify-content-around current-weather">
-        <div>
-          <div class="d-flex justify-content-between align-items-center">
-            <h4 class="p-0 currentday mr-3" id="weekdays"></h4>
-            <span class="currentWeather" id="current-description"></span>
-          </div>
-          <div class="d-flex justify-content-between">
-            <p>
-              Wind
-              <span class="text-lead" id="wind"></span>
-              m/s
-            </p>
-          </div>
-          <div class="d-flex justify-content-between">
-            <p>Visiblity</p>
-            <span class="text-lead" id="visibility"></span>
-          </div>
-        </div>
-        <div>
-          <div class="d-flex gap-3 justify-content-between">
-            <h4>
-              <span class="currentday" id="currentday"></span>
-              °C
-            </h4>
-            <h6 class="text-muted">
-              <span class="minCurrentday" id="minCurrentday"></span>
-              °C
-            </h6>
-          </div>
-          <div class="d-flex justify-content-between">
-            <p>
-              Humidity
-              <span class="text-muted" id="humidity"></span>
-              <span class="text-muted">
-                %
-              </span>
-            </p>
-          </div>
-          <div class="d-flex justify-content-between">
-            <p>UV</p>
-            <span class="text-lead"></span>
-          </div>
-        </div>
+
+      <div class="gridsystem">
+        <div class="grid"></div>
       </div>
- >
+
       <!-- 7 days updates -->
       <hr />
       <div class="container seven-days">

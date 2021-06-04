@@ -12,7 +12,7 @@ const updateWeather = (message) => {
 
 export const animateIcon = (element) => {
   animate(element)
-  setTimeout(animate, () => 1000)
+  setTimeout(animate, 1000)
 }
 
 const animate = (element) => {
@@ -25,6 +25,29 @@ export const cleanText = (text) => {
   const regex = /\s+/gi
   return text.replaceAll(regex, ' ').trim()
 }
+
+//
+export const getDataFromAPI = async (TextValue) => {
+  const regex = /^\d+$/
+  const units = 'metric'
+  const z = regex.test(TextValue)
+  const flag = z ? 'zip' : 'q'
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?${flag}=${TextValue}&units=${units}&appid=${APIkey}`
+
+  const encodeUrl = encodeURI(url)
+
+  try {
+    const fetchURL = await fetch(encodeUrl)
+    const dataJson = await fetchURL.json()
+    // console.log(dataJson)
+    return dataJson
+  } catch (error) {
+    errorDisplay(error.message)
+    
+  }
+}
+
 
 export const getWeather = async (myLoc) => {
   const lat = myLoc.Lat
@@ -64,6 +87,8 @@ const getWeatherClass = (icon) => {
 
 // console.log(dateObj())
 export const updateDisplay = (weatherJSON, myLoc) => {
+  fadeIn()
+  clearDisplay()
   const weatherClass = getWeatherClass(weatherJSON.current.weather[0].icon)
   setBGimage(weatherClass)
   // updateWeather('Today')
@@ -74,8 +99,43 @@ export const updateDisplay = (weatherJSON, myLoc) => {
   const weather = weatherelement(currentCondtion, weatherJSON)
   const secondContainer = document.querySelector('.secondContainer')
   secondContainer.append(weather)
+  const gridSystems = gridSystem(currentCondtion, weatherJSON)
+  const grid = document.querySelector('.gridsystem')
+  grid.append(gridSystems)
   // six days forecast
   createSixDaysForecast(weatherJSON)
+  fadeIn()
+}
+
+const fadeIn = () => {
+  const secondContainer = document.querySelector('.secondContainer')
+  secondContainer.classList.toggle('.noVisibility')
+  secondContainer.classList.toggle('.fade-in')
+  const currentgrid = document.querySelector('.gridsystem')
+  currentgrid.classList.toggle('.noVisibility')
+  currentgrid.classList.toggle('.fade-in')
+  const cc = document.querySelector('.seven-days')
+  cc.classList.toggle('.noVisibility')
+  cc.classList.toggle('.fade-in')
+}
+
+const clearDisplay = () => {
+  const secondContainer = document.querySelector('.secondContainer')
+  deleteContents(secondContainer)
+
+  const currentDataInfo = document.querySelector(".grid");
+  deleteContents(currentDataInfo);
+
+  const sevendays = document.querySelector('.row-div')
+  deleteContents(sevendays)
+}
+
+const deleteContents = (parementElem) => {
+  let child = parementElem.lastElementChild
+  while (child) {
+    parementElem.removeChild(child)
+    child = parementElem.lastElementChild
+  }
 }
 
 const setBGimage = (weatherClass) => {
@@ -89,9 +149,6 @@ const setBGimage = (weatherClass) => {
 }
 
 const createCurrentCondition = (weatherClass) => {
-  console.log(weatherClass.current.temp)
-  // const tempUnit = unit === 'imperial' ? 'F' : 'C'
-  // const windUnit = unit === 'imperial' ? 'mph' : 'm/s'
   const icon = iconMainDiv(
     weatherClass.current.weather[0].icon,
     weatherClass.current.weather[0].description,
@@ -108,6 +165,7 @@ const createCurrentCondition = (weatherClass) => {
     sunset,
     wind_speed,
     visibility,
+    uvi
   } = main
   const { country } = sys
   const { min, max } = weatherClass.daily[0].temp
@@ -141,6 +199,7 @@ const createCurrentCondition = (weatherClass) => {
     sunsetValue,
     dt,
     description,
+    uvi
   ]
 }
 const iconMainDiv = (icon, description) => {
@@ -226,6 +285,7 @@ const displayCurrentCondition = (currentCondtion, weatherJSON) => {
 }
 const weatherelement = (currentCondtion, weatherJSON) => {
   const generalContainer = document.createElement('div')
+  generalContainer.className = 'currentDataInfo'
   const container = document.createElement('div')
   container.className = 'm-right d-flex justify-content-center mt-3 mb-2 day'
   // weather icon
@@ -239,6 +299,7 @@ const weatherelement = (currentCondtion, weatherJSON) => {
 
   // today icon
   const container2 = document.createElement('div')
+
   const todayIcon = createEle('p', 'today mb-0', 'div', 'Today')
   const small = createEle('small', 'small', 'div', dateObj())
   todayIcon.id = 'today'
@@ -289,7 +350,7 @@ const getSunRIseOrSet = (weatherJSON, currentCondtion) => {
   var currentsunValue = ''
   const z = weatherJSON.current.dt
   const y = weatherJSON.current.sunrise
-  if (convertDateValue(z) < convertDateValue(y))
+  if (z <y)
     currentsunValue = `Sunset ${currentCondtion[12]}`
   else currentsunValue = `Sunrise ${currentCondtion[11]} `
   return currentsunValue
@@ -407,6 +468,31 @@ const createEle = (type, classname, tempValue, textcontent) => {
   element.className = classname
   element.innerHTML = textcontent
   if (tempValue === 'temp') element.innerHTML = `${textcontent}°C`
-
+if (tempValue ==="wind")element.innerHTML = `${textcontent} m/s`
+if (tempValue ==="humidity")element.innerHTML = `${textcontent}%`
   return element
 }
+
+
+// creating grid 
+
+ const gridSystem  = (currentCondtion, weatherJSON) =>{
+  const grid1= createEle("div", "grid-item grid-heading", "div",convertToDateString( weatherJSON.current.dt))
+  const grid2= createEle("div", "grid-item grid-heading grid2", "div", toProperCase(currentCondtion[14]))
+  const grid3= createEle("div", "grid-item grid-heading", "temp", currentCondtion[3])
+  const grid4= createEle("div", "grid-item text-muted", "temp", currentCondtion[4])
+  const grid5= createEle("div", "grid-item grid-heading", "div", "Wind")
+  const grid6= createEle("div", "grid-item text-muted", "wind", currentCondtion[7])
+  const grid7= createEle("div", "grid-item grid-heading", "div", "Humidity")
+  const grid8= createEle("div", "grid-item text-muted", "humidity", currentCondtion[6])
+  const grid9= createEle("div", "grid-item grid-heading", "div", "Visibility")
+  const grid10= createEle("div", "grid-item text-muted", "div", currentCondtion[8])
+  const grid11= createEle("div", "grid-item grid-heading", "div", "UV")
+  const grid12= createEle("div", "grid-item text-muted", "div", currentCondtion[15])
+
+   const gridContainer = document.querySelector(".grid")
+   // createEle("div","grid", "div", null);
+   gridContainer.append(grid1,grid2,grid3,grid4,grid5,grid6,grid7,grid8,grid9,grid10,grid11,grid12)
+return  gridContainer
+  }
+

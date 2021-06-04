@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+
 *,
 *::after *::after {
   margin: 0;
@@ -35,7 +37,7 @@ body {
   background: var(--main-color);
   background-blend-mode: overlay;
   color: var(--colored-white);
-
+  font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
   height: 100%;
@@ -152,7 +154,9 @@ sup {
   font-weight: 300;
   font-size: 2.6rem;
 }
-
+#networkError{
+  text-align: center;
+}
 /* 7 days */
 .seven-days {
   padding: 0;
@@ -177,6 +181,39 @@ sup {
 .text-lead {
   margin-left: 15px;
 }
-/* .text-lead {
+/* .text-lead {*/
+.row-div{
+margin: 0 auto;
+} 
+.grid{
+  display: grid;
+  grid-template-columns:auto auto auto auto  ;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  background-color: var(--main-white);
+  border-radius: 5px;
+  color: #1e1e45;
+  padding: 8px 0 12px 0;
+}
+.grid-item {
+ 
+  height: 50px;
+  padding: 10px;
 
-} */
+  text-align: left;
+  place-self: center;
+}
+.grid-heading{
+font-size: 1rem;
+font-weight: 600;
+}
+
+.grid2{
+  text-align: center;
+  word-wrap: nowrap;
+  word-break: keep-all;
+  word-spacing: 0;
+  letter-spacing: .1;
+  width: 100px;
+  }
