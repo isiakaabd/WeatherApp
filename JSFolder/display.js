@@ -340,7 +340,8 @@ const ToHours = (value) => {
   const timeValue = value
   const date = convertDateValue(timeValue)
   let hours = date.getHours()
-  const min = date.getMinutes()
+  var min = date.getMinutes()
+  if(min < 10) min =`0${min}`
   var time = ''
   if (hours > 12) {
     time = 'pm'
