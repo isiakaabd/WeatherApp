@@ -40,7 +40,6 @@ export const getDataFromAPI = async (TextValue) => {
   try {
     const fetchURL = await fetch(encodeUrl)
     const dataJson = await fetchURL.json()
-    console.log(dataJson)
     return dataJson
   } catch (error) {
     alert(error)
@@ -303,11 +302,10 @@ const weatherelement = (currentCondtion, weatherJSON, myLoc) => {
     currentCondtion[9],
   )
   const namelocation = createEle('span', 'name', 'p', currentCondtion[2])
-  // const countrylocation =createEle("span", "country","p",currentCondtion[2]);
   const edit = createEle('i', 'fas fa-edit', 'p')
   location.appendChild(namelocation, edit)
   locationContainer.append(weatherValue)
-  // locationContainer.append()
+
 
   const feelsLike = createEle(
     'p',
@@ -333,8 +331,8 @@ const getSunRIseOrSet = (weatherJSON, currentCondtion) => {
   var currentsunValue = ''
   const z = weatherJSON.current.dt
   const y = weatherJSON.current.sunrise
-  if (z <= y) currentsunValue = `Sunset ${currentCondtion[12]}`
-  else currentsunValue = `Sunrise ${currentCondtion[11]} `
+  if (y < z) currentsunValue = `Sunset ${currentCondtion[12]}`
+  if (y > z) currentsunValue = `Sunrise ${currentCondtion[11]}`
   return currentsunValue
 }
 

@@ -132,7 +132,6 @@ button {
 }
 .search-icon {
   padding-right: 8px !important;
-  /* z-index: 2; */
   color: var(--main-color) !important;
   cursor: pointer;
 }

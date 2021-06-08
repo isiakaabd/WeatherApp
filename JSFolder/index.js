@@ -17,8 +17,6 @@ const initApp = () => {
   const searchForm = document.getElementById('searchForm')
   const mapIcon = document.querySelector('.fa-map-marker');
   
-  //const searchbtn = document.getElementById("search-input").value
-
   mapIcon.addEventListener("click", ()=>getWeatherOnLoad())
   searchForm.addEventListener('submit', searchNewlocation)
   searchForm.reset()
@@ -86,7 +84,7 @@ async function searchNewlocation(e) {
   //name: ` lat:${coordsData.coord.lat} lon:${coordsData.coord.lat}`,
       }
       setCurrentLocation(myLoc, myCoordObj)
-      console.log(myLoc)
+     
       updateAndDisplay(myLoc, coordsData)
     } 
   if(coordsData.cod == 400) return errorDisplay("Enter a search keyword")
