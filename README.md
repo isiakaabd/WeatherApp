@@ -1,5 +1,7 @@
+
 Hi guys 👋,
-This a weather App built with HTML, CSS and Vanilla javascript using <a href ="https://openweathermap.org/api"> Open Weather API</a> . The webite provides<br> 
+This a weather App built with HTML, CSS and Vanilla javascript using <a href ="https://openweathermap.org/api"> Open Weather API</a> . The website provides<br> 
+
 a) geolocation of search keywords <br>
 b)current weather forecast <br>
 c) Time for sunset and sunrise for different locations<br>
