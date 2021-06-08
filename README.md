@@ -1,5 +1,5 @@
 
-Hi guys 👋,
+Hi guys 👋 <br>,
 This a weather App built with HTML, CSS and Vanilla javascript using <a href ="https://openweathermap.org/api"> Open Weather API</a> . The website provides<br> 
 
 a) geolocation of search keywords <br>
