@@ -39,9 +39,9 @@ set setUnit (unit){
     this.unit = unit
 }
 
-toggleUnit(){
-  this.unit = this.unit  === "imperial" ? "metric" :"imperial"
-}
+// toggleUnit(){
+//   this.unit = this.unit  === "imperial" ? "metric" :"imperial"
+// }
 
 }
 

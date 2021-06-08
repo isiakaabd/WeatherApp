@@ -41,7 +41,7 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  background-size:cover;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 .noVisibility {
@@ -105,24 +105,24 @@ sup {
 
 .none {
   display: none;
-  
 }
 .block {
   display: block;
 }
 
 .small {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
-h4,h6 {
+h4,
+h6 {
   margin-bottom: 0;
   align-self: center;
 }
 .search-input:focus {
   outline: 0;
   color: var(--main-color);
-  background-color:transparent !important;
+  background-color: none !important;
 }
 
 button {
@@ -137,8 +137,8 @@ button {
   cursor: pointer;
 }
 
-.fa-map-marker{
-cursor:pointer
+.fa-map-marker {
+  cursor: pointer;
 }
 #container {
   display: flex;
@@ -146,7 +146,7 @@ cursor:pointer
   height: 100vh;
 }
 
-.round{
+.round {
   display: inline-block;
   height: 10px;
   width: 10px;
@@ -160,7 +160,7 @@ sup {
   font-weight: 300;
   font-size: 2.6rem;
 }
-#networkError{
+#networkError {
   text-align: center;
 }
 /* 7 days */
@@ -188,51 +188,43 @@ sup {
   margin-left: 15px;
 }
 /* .text-lead {*/
-.row-div{
-margin: 0 auto;
-} 
-.grid{
+.row-div {
+  margin: 0 auto;
+}
+.grid {
   display: grid;
-  grid-template-columns:auto auto auto auto  ;
+  grid-template-columns: auto auto auto auto;
   border: none;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   background-color: var(--main-white);
   border-radius: 5px;
-  color: #1e1e45;
+  color:var(--main-color);
   padding: 8px 0 12px 0;
   margin: 0 auto;
-  grid-template-rows: 2fr 1fr 1fr;
+  grid-area: auto;
+  align-items: center;
 }
 .grid-item {
- 
   height: 50px;
   padding: 10px;
-width: 100%;
+  width: 100%;
   text-align: left;
   place-self: center;
 }
-.grid-heading{
-font-size: 1rem;
-font-weight: 600;
-line-height: 1.2;
+.grid-heading {
+  font-size: 1rem;
+  font-weight: 600;
+
 }
 
-.grid2{
+.latLon {
   text-align: center;
+  margin-bottom: 8px;
+}
 
-  word-break: keep-all;
-  word-spacing: 0;
-  padding: 0;
-  }
+hr {
+  line-height: 4px;
 
-  .latLon{
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  hr{
-    line-height : 4px;
-  
-    color: var(--main-white);
-  }
+  color: var(--main-white);
+}

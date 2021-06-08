@@ -1,4 +1,4 @@
-// import {geoError} from "./display.js";
+
 import CurrentLoc, { setCurrentLocation } from './Location.js'
 import {
   cleanText,
@@ -35,7 +35,8 @@ const geoSuccess = (position) => {
   const myCoordObj = {
     lat: position.coords.latitude,
     lon: position.coords.longitude,
-    name: `lat:${position.coords.latitude} Lon :${position.coords.longitude}`,
+    //name: ,
+    name: `lat: ${position.coords.latitude.toFixed(3)} , Lon: ${position.coords.longitude.toFixed(3)}`,
   }
   setCurrentLocation(myLoc, myCoordObj)
   updateAndDisplay(myLoc)
@@ -48,6 +49,7 @@ const updateAndDisplay = async (myLoc) => {
   if (weatherJSON) {
  
   updateDisplay(weatherJSON, myLoc)
+
 }
 }
 const geoError = (errObj) => {
@@ -58,6 +60,9 @@ const geoError = (errObj) => {
 
   errorDisplay(message)
 }
+
+
+
 
 async function searchNewlocation(e) {
   e.preventDefault()
@@ -77,13 +82,15 @@ async function searchNewlocation(e) {
       const myCoordObj = {
         lat: coordsData.coord.lat,
         lon: coordsData.coord.lon,
-        name: ` lat:${coordsData.coord.lat} lon:${coordsData.coord.lat}`,
+        name: `${coordsData.name}, ${coordsData.sys.country}`
+  //name: ` lat:${coordsData.coord.lat} lon:${coordsData.coord.lat}`,
       }
       setCurrentLocation(myLoc, myCoordObj)
+      console.log(myLoc)
       updateAndDisplay(myLoc, coordsData)
     } 
   if(coordsData.cod == 400) return errorDisplay("Enter a search keyword")
-    else errorDisplay(coordsData.message)
+    else errorDisplay( coordsData.message)
   }else errorDisplay("connection Error")
 }
 
