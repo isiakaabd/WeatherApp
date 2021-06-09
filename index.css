@@ -43,6 +43,7 @@ body {
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
+  
 }
 .noVisibility {
   visibility: hidden;
@@ -143,6 +144,13 @@ button {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  flex-grow: 1;
+}
+.secondContainer{
+  flex-grow: 2;
+}
+.seven-days{
+  flex: 1.5;
 }
 
 .round {
@@ -226,4 +234,11 @@ hr {
   line-height: 4px;
 
   color: var(--main-white);
+}
+.headings{
+  flex-direction: column;
+  flex:2
+}
+form {
+  width: 100%;
 }

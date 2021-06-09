@@ -11,6 +11,10 @@ import {
 
 const myLoc = new CurrentLoc()
 
+
+// // require('dotenv').config()
+
+// console.log(process.env)
 window.addEventListener('load', () => initApp())
 // DOMContentloaded
 const initApp = () => {

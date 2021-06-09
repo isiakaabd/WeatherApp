@@ -1,0 +1,25 @@
+{
+  "name": "myWeatherApp",
+  "version": "1.0.0",
+  "description": "Hi guys 👋 <br>,\r This a weather App built with HTML, CSS and Vanilla javascript using <a href =\"https://openweathermap.org/api\"> Open Weather API</a> . The website provides<br>",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isiakaabd/WeatherApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isiakaabd/WeatherApp/issues"
+  },
+  "homepage": "https://github.com/isiakaabd/WeatherApp#readme"
+}
